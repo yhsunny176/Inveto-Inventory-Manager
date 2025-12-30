@@ -3,7 +3,8 @@ import SignOutButton from "./sign-out-button";
 import Sidebar from "@/components/Sidebar";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
-import { Key, TrendingUp } from "lucide-react";
+import { TrendingUp } from "lucide-react";
+import ProductsChart from "@/components/ProductsChart";
 
 export default async function DashboardPage() {
     const session = await getCurrentUser();
@@ -35,6 +36,31 @@ export default async function DashboardPage() {
     });
 
     const totalValue = allProducts.reduce((sum, product) => sum + Number(product.price) * Number(product.quantity), 0);
+
+    const now = new Date();
+    const weeklyProductsData = [];
+
+    for (let i = 11; i >= 0; i--) {
+        const weekStart = new Date(now);
+        weekStart.setDate(weekStart.getDate() - i * 7);
+        weekStart.setHours(0, 0, 0, 0);
+
+        const weekEnd = new Date(weekStart);
+        weekEnd.setDate(weekEnd.getDate() + 6);
+        weekStart.setHours(23, 59, 59, 999);
+
+        const weekLabel = `${String(weekStart.getMonth() + 1).padStart(2, "0")}/${String(weekStart.getDate() + 1).padStart(2, "0")}`;
+
+        const weeklyProducts = allProducts.filter((product) => {
+            const productDate = new Date(product.createdAt);
+            return productDate >= weekStart && productDate <= weekEnd;
+        });
+
+        weeklyProductsData.push({
+            week: weekLabel,
+            products: weeklyProducts.length,
+        });
+    }
 
     return (
         <div className="flex min-h-screen bg-gray-50">
@@ -91,6 +117,17 @@ export default async function DashboardPage() {
                             </div>
                         </div>
                     </div>
+
+                    {/* Inventory over the Time (Products added per week) */}
+
+                    <div className="bg-white rounded-lg border border-gray-200 p-6">
+                        <div className="flex items-center justify-betweeen mb-6">
+                            <h2>New Products Per Week</h2>
+                        </div>
+                        <div className="h-48">
+                            <ProductsChart data={weeklyProductsData} />
+                        </div>
+                    </div>
                 </div>
 
                 {/* Stock Levels Section */}
@@ -107,10 +144,14 @@ export default async function DashboardPage() {
                                 const textColors = ["text-red-600", "text-yellow-600", "text-green-600"];
 
                                 return (
-                                    <div key={key} className="flex items-center justify-between p-3 rounded-lg bg-gray-50">
+                                    <div
+                                        key={key}
+                                        className="flex items-center justify-between p-3 rounded-lg bg-gray-50">
                                         <div className="flex items-center space-x-3">
                                             <div className={`w-3 h-3 rounded-full ${bgColors[stockLevel]}`}></div>
-                                            <span className="text-gray-600 text-sm font-medium gray-900">{product.name}</span>
+                                            <span className="text-gray-600 text-sm font-medium gray-900">
+                                                {product.name}
+                                            </span>
                                         </div>
                                         <div className={`text-sm font-medium ${textColors[stockLevel]}`}>
                                             {product.quantity} units
