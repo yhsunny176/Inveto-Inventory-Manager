@@ -1,16 +1,29 @@
+import Pagination from "@/components/Pagination";
 import Sidebar from "@/components/Sidebar";
 import deleteProduct from "@/lib/actions/products";
 import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
-export default async function page({searchParams}: {searchParams: Promise<{q?: string}>}) {
+export default async function page({ searchParams }: { searchParams: Promise<{ q?: string; page?: string }> }) {
     const session = await getCurrentUser();
     const userId = session.data?.user.id;
     const params = await searchParams;
     const q = (params.q ?? "").trim();
 
-    const products = await prisma.product.findMany({ where: { userId, name: {contains: q, mode: "insensitive"} } });
+    const where = {
+        userId,
+        ...(q ? { name: { contains: q, mode: "insensitive" as const } } : {}),
+    };
 
+    const pageSize = 10;
+
+    const page = Math.max(1, Number(params.page ?? 1));
+    const [totalCount, products] = await Promise.all([
+        prisma.product.count({ where }),
+        prisma.product.findMany({ where, orderBy: { createdAt: "desc" }, skip: (page - 1) * pageSize, take: pageSize }),
+    ]);
+
+    const totalPages = Math.max(1, Math.ceil(totalCount / pageSize));
 
     return (
         <div className="flex min-h-screen bg-gray-50">
@@ -38,7 +51,9 @@ export default async function page({searchParams}: {searchParams: Promise<{q?: s
                                 className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:border-transparent text-gray-900"
                                 type="text"
                             />
-                            <button className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">Search</button>
+                            <button className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
+                                Search
+                            </button>
                         </form>
                     </div>
 
@@ -92,6 +107,17 @@ export default async function page({searchParams}: {searchParams: Promise<{q?: s
                             </tbody>
                         </table>
                     </div>
+
+                    {totalPages > 1 && (
+                        <div className="bg-white rounded-lg border border-gray-200 p-6">
+                            <Pagination
+                                currentPage={page}
+                                totalPages={totalPages}
+                                baseUrl="/inventory"
+                                searchParams={{ q, pageSize: String(pageSize) }}
+                            />
+                        </div>
+                    )}
                 </div>
             </main>
         </div>
