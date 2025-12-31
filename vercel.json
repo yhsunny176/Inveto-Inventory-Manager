@@ -3,9 +3,5 @@
   "devCommand": "next dev",
   "installCommand": "npm install",
   "framework": "nextjs",
-  "regions": ["sin1"],
-  "env": {
-    "DATABASE_URL": "@database_url",
-    "NEON_AUTH_BASE_URL": "@neon_auth_base_url"
-  }
+  "regions": ["sin1"]
 }
