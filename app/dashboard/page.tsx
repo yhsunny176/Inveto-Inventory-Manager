@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation";
 import Sidebar from "@/components/Sidebar";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
@@ -8,10 +7,6 @@ import ProductsChart from "@/components/ProductsChart";
 export default async function DashboardPage() {
     const session = await getCurrentUser();
     const userId = session.data?.user.id;
-
-    if (!session) {
-        redirect("/auth/sign-in");
-    }
 
     const [totalProducts, lowStock, allProducts] = await Promise.all([
         prisma.product.count({ where: { userId } }),

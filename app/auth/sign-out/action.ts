@@ -11,5 +11,5 @@ export async function signOut() {
     return { error: error.message || 'Failed to sign out. Try again' };
   }
 
-  redirect('/');
+  redirect('/auth/sign-in');
 }

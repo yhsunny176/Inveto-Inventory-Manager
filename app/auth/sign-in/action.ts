@@ -14,6 +14,6 @@ export async function signInWithEmail(_prevState: { error: string } | null, form
         return { error: error.message || "Failed to sign in. Try again" };
     }
 
-    revalidatePath("/", "layout");
-    redirect("/");
+    revalidatePath("/dashboard", "layout");
+    redirect("/dashboard");
 }
