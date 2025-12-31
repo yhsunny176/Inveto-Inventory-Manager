@@ -10,21 +10,17 @@ export default function SignOutButton() {
 
     const handleSignOut = async () => {
         setIsLoading(true);
-
-        const { error } = await authClient.signOut({
-            fetchOptions: {
-                onSuccess: () => {
-                    router.push("/");
-                    router.refresh();
-                },
-            },
-        });
+        
+        const { error } = await authClient.signOut();
 
         if (error) {
             console.error("Sign out error:", error.message);
             setIsLoading(false);
             return;
         }
+
+        router.push("/");
+        router.refresh();
     };
 
     return (

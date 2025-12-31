@@ -46,6 +46,7 @@ Inveto Inventory Manager is a robust web application designed to streamline and 
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white) (Configurable via Prisma, e.g., MySQL, SQLite)
 
 **DevOps & Tools:**
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
 ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
@@ -54,8 +55,8 @@ Inveto Inventory Manager is a robust web application designed to streamline and 
 
 ### Prerequisites
 Before you begin, ensure you have the following installed:
--   Node.js (LTS version recommended)
--   A database compatible with Prisma (e.g., PostgreSQL, MySQL, SQLite)
+-   **Option 1 (Docker - Recommended):** Docker Desktop
+-   **Option 2 (Local Development):** Node.js (LTS version recommended) and a database compatible with Prisma (e.g., PostgreSQL, MySQL, SQLite)
 
 ### Installation
 
@@ -97,6 +98,67 @@ Before you begin, ensure you have the following installed:
 
 6.  **Open your browser**
     Visit `http://localhost:3000`
+
+### 🐳 Docker Setup (Recommended)
+
+Docker provides a containerized environment for easy deployment and consistent development experience.
+
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/yhsunny176/Inveto-Inventory-Manager.git
+    cd Inveto-Inventory-Manager
+    ```
+dockerignore         # Files to exclude from Docker build
+├── .gitignore            # Specifies intentionally untracked files to ignore
+├── docker-compose.yaml   # Docker Compose orchestration file
+├── Dockerfile            # Docker image build instructions
+2.  **Environment setup**
+    Create a `.env` file in the root directory:
+    ```bash
+    cp .env.example .env
+    ```
+    Configure your environment variables in `.env`:
+    ```
+    DATABASE_URL="<YOUR_DATABASE_CONNECTION_STRING>"
+    NEON_AUTH_BASE_URL="<YOUR_NEON_AUTH_BASE_URL>"
+    NEXT_PUBLIC_NEON_AUTH_BASE_URL="<YOUR_NEON_AUTH_BASE_URL>"
+    NEXT_PUBLIC_APP_URL="http://localhost:3000"
+    ```
+
+3.  **Start Docker Desktop**
+    Ensure Docker Desktop is running on your machine.
+
+4.  **Build and run with Docker Compose**
+    ```bash
+    docker compose up -d --build
+    ```
+    This command will:
+    -   Build the Docker image with all dependencies
+    -   Run Prisma migrations
+    -   Start the application on port 3000
+
+5.  **Access the application**
+    Visit `http://localhost:3000`
+
+6.  **View logs** (optional)
+    ```bash
+    docker compose logs -f app
+    ```
+
+7.  **Stop the application**
+    ```bash
+    docker compose down
+    ```
+
+### 🐳 Docker Commands Reference
+| Command                           | Description                                      |
+|-----------------------------------|--------------------------------------------------|
+| `docker compose up -d`            | Start the application in detached mode           |
+| `docker compose up -d --build`    | Rebuild and start the application                |
+| `docker compose down`             | Stop and remove containers                       |
+| `docker compose logs -f app`      | View live application logs                       |
+| `docker compose ps`               | Check container status                           |
+| `docker compose restart app`      | Restart the application container                |
 
 ## 📁 Project Structure
 
@@ -167,7 +229,11 @@ To create an optimized build for production:
 npm run build
 ```
 This command compiles the application into the `.next` directory, ready for deployment.
-
+The application is fully containerized with Docker. Deploy to any Docker-compatible environment:
+    -   **Docker Compose:** Use `docker compose up -d` for simple deployments
+    -   **Container Platforms:** AWS ECS, Google Cloud Run, Azure Container Instances
+    -   **Kubernetes:** Deploy using the provided Dockerfile
+    -   **Cloud Platforms:** Railway, Render, DigitalOcean App Platform
 ### Deployment Options
 -   **Vercel:** Next.js applications are seamlessly deployed to Vercel. Connect your GitHub repository, and Vercel will automatically detect and deploy your project.
 -   **Docker:** A `Dockerfile` can be added to containerize the application for deployment to any Docker-compatible environment (e.g., Kubernetes, AWS ECS, Google Cloud Run).
