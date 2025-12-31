@@ -13,8 +13,8 @@ export default function Sidebar({ currentPath = "/dashboard" }: { currentPath: s
     ];
 
     return (
-        <div className="bg-gray-900 text-white w-64 min-h-screen p-6 shrink-0 relative">
-            <div className="mb-8">
+        <div className="bg-gray-900 text-white w-64 h-screen p-6 shrink-0 flex flex-col overflow-hidden sticky top-0">
+            <div className="flex-1 overflow-y-auto">
                 <div className="flex items-center space-x-2 mb-12">
                     <div>
                         <p className="font-bold text-2xl">Inveto</p>
@@ -38,7 +38,7 @@ export default function Sidebar({ currentPath = "/dashboard" }: { currentPath: s
                     })}
                 </nav>
             </div>
-            <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-gray-700">
+            <div className="border-t border-gray-700 pt-4 mt-4">
                 <div className="flex items-center justify-between">
                     <NeonAuthUIProvider authClient={authClient}>
                         <UserButton size="icon" />

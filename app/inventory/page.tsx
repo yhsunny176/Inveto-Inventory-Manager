@@ -26,12 +26,12 @@ export default async function page({ searchParams }: { searchParams: Promise<{ q
     const totalPages = Math.max(1, Math.ceil(totalCount / pageSize));
 
     return (
-        <div className="flex min-h-screen bg-gray-50">
+        <div className="flex h-screen bg-gray-50 overflow-hidden">
             <aside>
                 <Sidebar currentPath="/inventory" />
             </aside>
 
-            <main className="flex-1 overflow-auto p-8">
+            <main className="flex-1 overflow-y-auto p-8">
                 <div className="mb-8">
                     <div className="flex items-center justify-between">
                         <div>

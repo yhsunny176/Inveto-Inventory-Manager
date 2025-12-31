@@ -8,12 +8,12 @@ export default async function AccountPage({ params }: { params: Promise<{ path: 
     const { path } = await params;
 
     return (
-        <div className="flex min-h-screen bg-gray-50">
+        <div className="flex h-screen bg-gray-50 overflow-hidden">
             <aside>
                 <Sidebar currentPath="/account/settings" />
             </aside>
 
-            <main className="flex-1 overflow-auto mx-20">
+            <main className="flex-1 overflow-y-auto mx-20">
                 <header>
                     <div className="container mx-auto px-4 py-8">
                         <div className="flex justify-between items-center">

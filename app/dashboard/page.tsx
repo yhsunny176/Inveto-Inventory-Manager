@@ -71,12 +71,12 @@ export default async function DashboardPage() {
     }
 
     return (
-        <div className="flex min-h-screen bg-gray-50">
+        <div className="flex h-screen bg-gray-50 overflow-hidden">
             <aside>
                 <Sidebar currentPath="/dashboard" />
             </aside>
 
-            <main className="flex-1 overflow-auto">
+            <main className="flex-1 overflow-y-auto">
                 <header>
                     <div className="container mx-auto px-4 py-8">
                         <div className="flex justify-between items-center">
