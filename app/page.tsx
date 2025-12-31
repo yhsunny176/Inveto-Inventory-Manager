@@ -1,12 +1,6 @@
 import Link from "next/link";
-import { authServer } from "@/lib/auth/server";
-import { redirect } from "next/navigation";
 
 export default async function Home() {
-    const user = await authServer.getSession();
-    if (user) {
-        redirect("/dashboard");
-    }
     return (
         <div className="min-h-screen bg-linear-to-br from-purple-50 to-purple-100 flex items-center justify-center">
             <div className="container mx-auto px-4 py-16">

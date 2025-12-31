@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation";
-import SignOutButton from "./sign-out-button";
 import Sidebar from "@/components/Sidebar";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
@@ -77,17 +76,14 @@ export default async function DashboardPage() {
             </aside>
 
             <main className="flex-1 overflow-y-auto">
-                <header>
-                    <div className="container mx-auto px-4 py-8">
-                        <div className="flex justify-between items-center">
-                            <div>
-                                <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
-                                <p className="text-sm text-gray-500">Welcome Back!</p>
-                            </div>
-                            <SignOutButton />
+                <div className="mb-8">
+                    <div className="flex items-center justify-between">
+                        <div>
+                            <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
+                            <p className="text-sm text-gray-500">Welcome</p>
                         </div>
                     </div>
-                </header>
+                </div>
 
                 {/* Metrics to Show */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-11/12 mx-auto mb-8">

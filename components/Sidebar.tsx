@@ -1,6 +1,6 @@
 "use client";
-import { authClient } from "@/lib/auth/client";
-import { NeonAuthUIProvider, UserButton } from "@neondatabase/auth/react";
+
+import { UserButton } from "@neondatabase/auth/react";
 import { BarChart3, Package, Plus, Settings } from "lucide-react";
 import Link from "next/link";
 

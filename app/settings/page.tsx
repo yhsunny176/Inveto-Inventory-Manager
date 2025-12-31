@@ -1,6 +1,5 @@
 import Sidebar from "@/components/Sidebar";
 import "../globals.css"
-import SignOutButton from "../dashboard/sign-out-button";
 import { AccountView } from "@neondatabase/auth/react";
 
 export default async function page() {
@@ -18,7 +17,6 @@ export default async function page() {
                                 <h1 className="text-2xl font-semibold text-gray-900">Settings</h1>
                                 <p className="text-sm text-gray-500">Manage Account Settings</p>
                             </div>
-                            <SignOutButton />
                         </div>
                     </div>
                 </header>

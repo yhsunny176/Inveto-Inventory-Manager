@@ -1,6 +1,5 @@
 import Sidebar from "@/components/Sidebar";
 // import { getCurrentUser } from "@/lib/auth";
-import SignOutButton from "../dashboard/sign-out-button";
 import Link from "next/link";
 import { createProduct } from "@/lib/actions/products";
 
@@ -21,7 +20,6 @@ export default async function page() {
                                 <h1 className="text-2xl font-semibold text-gray-900">Add Product</h1>
                                 <p className="text-sm text-gray-500">Add a new product in inventory</p>
                             </div>
-                            <SignOutButton />
                         </div>
                     </div>
                 </header>
