@@ -78,10 +78,10 @@ Before you begin, ensure you have the following installed:
     Configure your environment variables in `.env`:
     ```
     DATABASE_URL="<YOUR_DATABASE_CONNECTION_STRING>" # e.g., postgresql://user:password@host:port/database
-    NEXTAUTH_SECRET="<YOUR_SECRET_FOR_NEXTAUTH>" # Required for NextAuth.js, if implemented or planned
+    NEON_AUTH_BASE_URL="<YOUR_NEON_AUTH_BASE_URL>" # Required for Neon Authentication
     ```
     Replace `<YOUR_DATABASE_CONNECTION_STRING>` with your actual database URL.
-    Replace `<YOUR_SECRET_FOR_NEXTAUTH>` with a strong, random string.
+    Replace `<YOUR_NEON_AUTH_BASE_URL>` with base url from your neon database dashboard.
 
 4.  **Database setup**
     Generate the Prisma client and run database migrations:
@@ -126,7 +126,7 @@ Environment variables are loaded from the `.env` file.
 | Variable          | Description                                         | Default | Required |
 |-------------------|-----------------------------------------------------|---------|----------|
 | `DATABASE_URL`    | Connection string for your Prisma-compatible database | `N/A`   | Yes      |
-| `NEXTAUTH_SECRET` | Secret key for NextAuth.js authentication (if used) | `N/A`   | Yes      |
+| `YOUR_NEON_AUTH_BASE_URL` | Neon Auth Base URL required for Neon Authentication | `N/A`   | Yes      |
 
 ### Configuration Files
 -   `next.config.ts`: Main configuration for Next.js, including image optimization, environment variables, and more.
