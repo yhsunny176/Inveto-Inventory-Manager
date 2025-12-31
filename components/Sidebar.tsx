@@ -40,9 +40,7 @@ export default function Sidebar({ currentPath = "/dashboard" }: { currentPath: s
             </div>
             <div className="border-t border-gray-700 pt-4 mt-4">
                 <div className="flex items-center justify-between">
-                    <NeonAuthUIProvider authClient={authClient}>
-                        <UserButton size="icon" />
-                    </NeonAuthUIProvider>
+                    <UserButton size="icon" />
                 </div>
             </div>
         </div>

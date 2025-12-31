@@ -10,7 +10,7 @@ export default function SignOutButton() {
 
     const handleSignOut = async () => {
         setIsLoading(true);
-        
+
         const { error } = await authClient.signOut();
 
         if (error) {
