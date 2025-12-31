@@ -1,2 +1,18 @@
 @import "tailwindcss";
 @import "@neondatabase/auth/ui/tailwind";
+
+.account-container>div>div:nth-child(2) {
+  @apply rounded-lg px-3 py-6;
+}
+
+.account-container>div {
+  @apply bg-gray-900 rounded-lg px-3 py-6;
+}
+
+.account-container .bg-card {
+  @apply bg-gray-900
+}
+
+.account-container .bg-card > div:nth-child(3) {
+  @apply bg-gray-900
+}

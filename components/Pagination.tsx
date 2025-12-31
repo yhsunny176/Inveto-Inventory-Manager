@@ -1,4 +1,3 @@
-import page from "@/app/inventory/page";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 

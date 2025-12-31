@@ -1,6 +1,6 @@
 import Pagination from "@/components/Pagination";
 import Sidebar from "@/components/Sidebar";
-import deleteProduct from "@/lib/actions/products";
+import { deleteProduct } from "@/lib/actions/products";
 import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
